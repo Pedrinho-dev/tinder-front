@@ -3,14 +3,28 @@
         <v-icon icon="mdi-arrow-left" @click="goBack" />
         <h1>Profile Details</h1>
         <h4>Fill up the following Details</h4>
-        <v-text-field v-model="name" label="First name" />
-        <v-text-field v-model="password" label="Password" />
-        <v-date-input v-model="date" label="DOB" />
-        <v-select v-model="gender" label="Select" :items="['Female', 'Male']" />
 
-        <v-btn @click="save">Continue</v-btn>
+        <form @submit.prevent="save">
+            <div>
+                <v-btn icon>
+                    <label for="photo" style="cursor: pointer; margin: 0;">
+                        <v-icon icon="mdi-account" />
+                    </label>
+                </v-btn>
+                <input id="photo" type="file" name="foto" style="display: none">
+            </div>
+
+            <v-text-field v-model="name" label="First name" />
+            <v-text-field v-model="password" label="Password" />
+            <v-date-input v-model="date" label="DOB" />
+            <v-select v-model="gender" label="Select" :items="['Female', 'Male']" />
+
+            <v-btn @click="save">Continue</v-btn>
+
+        </form>
     </v-container>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
@@ -23,23 +37,33 @@ const name = ref("");
 const password = ref("");
 const date = ref("");
 const gender = ref("");
+const photo = ref(null);
 
 function goBack() {
-    router.push("/login")
+    router.push("/login");
 }
 
 async function save() {
     try {
-        const userData = {
-            name: name.value,
-            password: password.value,
-            date: date.value,
-            gender: gender.value
-        };
-        await userStore.createUser(userData);
+        if (!name.value || !password.value || !date.value || !gender.value || !photo.value) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("name", name.value);
+        formData.append("password", password.value);
+        formData.append("date", date.value);
+        formData.append("gender", gender.value);
+        const file = document.querySelector("#photo").files[0];
+        formData.append("photo", file);
+
+        console.log([...formData.entries()]);
+
+        await userStore.createUser(formData);
         alert("Usuário criado com sucesso!");
-    }catch(err){
-        console.error(err)
+    } catch (err) {
+        console.error("Erro ao criar usuário:", err);
     }
 }
 </script>

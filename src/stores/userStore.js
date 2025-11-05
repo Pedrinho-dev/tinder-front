@@ -3,14 +3,14 @@ import api from "@/services/api";
 
 export const useUserStore = defineStore("user", {
     state: ()=>({
-        user:null
+        user: null
     }),
     getters: {},
     actions: {
-        async createUser(userData){
+        async createUser(formData){
             try{
-                const userCreated = api.post("/user", userData);
-                this.user = userCreated.data
+                const response = await api.post("/user", formData);
+                this.user = response.data
             }catch(err){
                 console.log(err)
             }
