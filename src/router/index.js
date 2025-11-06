@@ -13,6 +13,23 @@ const router = createRouter({
   routes,
 })
 
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+
+  if (to.path === '/login' || to.path === '/createAccount') {
+    if (token) {
+      return next('/home') 
+    }
+    return next()
+  }
+
+  if (!token) {
+    return next('/login') 
+  }
+
+  next()
+})
+
 // Workaround for https://github.com/vitejs/vite/issues/11804
 router.onError((err, to) => {
   if (err?.message?.includes?.('Failed to fetch dynamically imported module')) {

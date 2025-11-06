@@ -7,6 +7,15 @@ export const useAuthStore = defineStore("authStore", {
     }),
     getters: ({}),
     actions: {
+        async register(formData) {
+            try {
+                const response = await api.post("/auth/register", formData);
+                this.user = response.data
+            } catch (err) {
+                console.log(err)
+            }
+
+        },
         async login(user) {
             try {
                 const response = await api.post("/auth/login", user);

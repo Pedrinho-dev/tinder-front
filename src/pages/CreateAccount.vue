@@ -11,7 +11,7 @@
                         <v-icon icon="mdi-account" />
                     </label>
                 </v-btn>
-                <input id="photo" type="file" name="foto" style="display: none">
+                <input id="photo" type="file" name="foto" style="display: none" @change="handlePhoto">
             </div>
 
             <v-text-field v-model="name" label="First name" />
@@ -28,10 +28,10 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useUserStore } from "@/stores/userStore";
+import { useAuthStore } from "@/stores/authStore";
 
 const router = useRouter();
-const userStore = useUserStore();
+const authStore = useAuthStore();
 
 const name = ref("");
 const password = ref("");
@@ -41,6 +41,14 @@ const photo = ref(null);
 
 function goBack() {
     router.push("/login");
+}
+
+function handlePhoto(event) {
+    const file = event.target.files[0];
+    if (file) {
+        photo.value = file;
+        alert("Foto capturada com sucesso!");
+    }
 }
 
 async function save() {
@@ -58,10 +66,9 @@ async function save() {
         const file = document.querySelector("#photo").files[0];
         formData.append("photo", file);
 
-        console.log([...formData.entries()]);
-
-        await userStore.createUser(formData);
+        await authStore.register(formData);
         alert("Usuário criado com sucesso!");
+        router.push('/login')
     } catch (err) {
         console.error("Erro ao criar usuário:", err);
     }

@@ -3,7 +3,7 @@
         <v-icon icon="mdi-arrow-left" @click="goBack" />
         <h1>Login</h1>
         <v-text-field v-model="name" label="Name" />
-        <v-text-field v-model="password" label="Password"/>
+        <v-text-field v-model="password" label="Password" />
         <router-link to="/createAccount"> Sign up </router-link>
         <v-btn @click="login">Continue</v-btn>
     </v-container>
@@ -28,6 +28,12 @@ function goBack() {
 async function login() {
     const user = { name: name.value, password: password.value };
     await authStore.login(user);
-    alert(`Seja bem vindo:, ${name.value}`);
+    if (localStorage.getItem('token')) {
+        router.push('/home')
+        alert(`Welcome: ${name.value}`);
+    } else {
+        alert('Login failed!')
+    }
+
 }
 </script>
