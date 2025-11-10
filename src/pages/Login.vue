@@ -5,7 +5,7 @@
         <v-text-field v-model="name" label="Name" />
         <v-text-field v-model="password" label="Password" />
         <router-link to="/createAccount"> Sign up </router-link>
-        <v-btn @click="login">Continue</v-btn>
+        <v-btn @click="login">Login</v-btn>
     </v-container>
 </template>
 <script setup>
