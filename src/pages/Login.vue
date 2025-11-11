@@ -29,7 +29,7 @@ async function login() {
     const user = { name: name.value, password: password.value };
     await authStore.login(user);
     if (localStorage.getItem('token')) {
-        router.push('/home')
+        router.push('/interest')
         alert(`Welcome: ${name.value}`);
     } else {
         alert('Login failed!')

@@ -38,25 +38,6 @@ export const useUserStore = defineStore("user", {
             }
         },
 
-        async addInterest(interest) {
-            const token = localStorage.getItem("token");
-
-            if (!token) {
-                throw new Error("Token not found in localStorage");
-            }
-
-            try {
-                const response = await api.put("/user/", { interest }, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                this.interest = response.data
-            } catch (err) {
-                console.log(err)
-            }
-        },
-
         async editProfile(userId, updates) {
             const token = localStorage.getItem("token");
             try {
