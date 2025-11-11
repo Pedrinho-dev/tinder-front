@@ -21,13 +21,21 @@
                     <i class="mdi mdi-account"></i>
                 </router-link>
             </li>
+            <v-btn style="background: radial-gradient(circle at top, #1b0935 0%, #0d061b 55%, #090615 100%)" class="mdi mdi-logout" @click="logout">
+                <v-icon></v-icon>
+            </v-btn>
         </ul>
     </nav>
 </template>
 
-<script>
-export default {
-    name: "Menu",
+<script setup>
+import {useRouter} from "vue-router";
+
+const router = useRouter()
+const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    router.push("/login");
 };
 </script>
 

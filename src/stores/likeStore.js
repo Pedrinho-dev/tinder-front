@@ -18,6 +18,10 @@ export const useLikeStore = defineStore("likeStore", {
                     }
                 });
                 this.like = response.data;
+
+                if (response.data.match) {
+                    alert("It's a MATCH!!!");
+                }
                 return response.data;
             } catch (err) {
                 console.error("Failed like!", err);
