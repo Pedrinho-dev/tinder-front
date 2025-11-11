@@ -11,20 +11,26 @@ export const useUserStore = defineStore("user", {
         async findUsers() {
             try {
                 const response = await api.get("/user")
-                console.log("Usuarios", response)
-                this.users = response.data;
+                this.users = response.data.map(user =>({
+                    id: user._id,
+                    name: user.name,
+                    date: user.date,
+                    gender: user.gender,
+                    interest: user.interest
+                }));
             } catch (err) {
                 console.log(err)
             }
         },
 
         async addInterest(interest) {
+            const token = localStorage.getItem("token");
+            
             if (!token) {
                 throw new Error("Token not found in localStorage");
             }
 
             try {
-                const token = localStorage.getItem("token");
                 const response = await api.put("/user/", { interest }, {
                     headers: {
                         Authorization: `Bearer ${token}`

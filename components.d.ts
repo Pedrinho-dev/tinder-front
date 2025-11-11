@@ -15,5 +15,7 @@ declare module 'vue' {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TinderActions: typeof import('./src/components/TinderActions.vue')['default']
+    TinderCard: typeof import('./src/components/TinderCard.vue')['default']
   }
 }
