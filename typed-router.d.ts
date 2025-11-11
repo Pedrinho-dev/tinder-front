@@ -19,10 +19,13 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
+    '/Account': RouteRecordInfo<'/Account', '/Account', Record<never, never>, Record<never, never>>,
     '/CreateAccount': RouteRecordInfo<'/CreateAccount', '/CreateAccount', Record<never, never>, Record<never, never>>,
     '/Home': RouteRecordInfo<'/Home', '/Home', Record<never, never>, Record<never, never>>,
     '/Interest': RouteRecordInfo<'/Interest', '/Interest', Record<never, never>, Record<never, never>>,
+    '/Likes': RouteRecordInfo<'/Likes', '/Likes', Record<never, never>, Record<never, never>>,
     '/Login': RouteRecordInfo<'/Login', '/Login', Record<never, never>, Record<never, never>>,
+    '/Matches': RouteRecordInfo<'/Matches', '/Matches', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -40,6 +43,10 @@ declare module 'vue-router/auto-routes' {
       routes: '/'
       views: never
     }
+    'src/pages/Account.vue': {
+      routes: '/Account'
+      views: never
+    }
     'src/pages/CreateAccount.vue': {
       routes: '/CreateAccount'
       views: never
@@ -52,8 +59,16 @@ declare module 'vue-router/auto-routes' {
       routes: '/Interest'
       views: never
     }
+    'src/pages/Likes.vue': {
+      routes: '/Likes'
+      views: never
+    }
     'src/pages/Login.vue': {
       routes: '/Login'
+      views: never
+    }
+    'src/pages/Matches.vue': {
+      routes: '/Matches'
       views: never
     }
   }

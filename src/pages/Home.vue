@@ -32,6 +32,7 @@
 
                     </template>
                 </FlashCards>
+
             </v-col>
         </v-row>
     </v-container>
