@@ -1,10 +1,8 @@
 <template>
-
     <v-container class="home-page pa-0" fluid>
         <v-row justify="center" class="home-row">
             <v-col cols="12" md="6" class="home-col">
                 <div class="card-area">
-                    <h2 class="homeText">Home</h2>
                     <FlashCards :items="items" @approve="handleSwipeApprove" @reject="handleSwipeReject">
                         <template #default="{ item }">
                             <TinderCard :item="item" />
