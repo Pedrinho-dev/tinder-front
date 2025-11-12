@@ -17,7 +17,7 @@ import Menu from '@/components/Menu.vue';
 
 const route = useRoute();
 
-const showMenu = computed(() => !['/login', '/createAccount', '/interest'].includes(route.path));
+const showMenu = computed(() => !['/login', '/createAccount', '/interest', '/'].includes(route.path));
 </script>
 
 <style scoped>
